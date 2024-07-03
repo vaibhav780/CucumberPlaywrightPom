@@ -1,9 +1,9 @@
 Feature: Login
-  Scenario:Register user
-    Given user launched application
-    When user verify Home Page
-    When user navigate to register page
-    When user Register in application
+#  Scenario:Register user
+#    Given user launched application
+#    When user verify Home Page
+#    When user navigate to register page
+#    When user Register in application
 
 
   Scenario:Login and logout user

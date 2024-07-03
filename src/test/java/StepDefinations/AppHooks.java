@@ -32,8 +32,6 @@ public class AppHooks  extends PlaywrightFactory {
 
     @Before
     public void setup(Scenario scenario){
-
-
         playwrightFactory = new PlaywrightFactory();
         page = playwrightFactory.initbrowser();
         ComLogger.info(Testconfig.getprop("url"));
@@ -41,23 +39,32 @@ public class AppHooks  extends PlaywrightFactory {
         ComLogger.info("+++++++++++++++++++++++++SCENARIO STARTED+++++++++++++++++++++++++");
         ComLogger.info("+++++++++++++++++++++++++" + scenario.getName() + "+++++++++++++++++++++++++");
         ComLogger.info("Driver initied");
-        System.out.println(scenario.getLine());
+        context.tracing().start(new Tracing.StartOptions()
+                .setScreenshots(true)
+                .setSnapshots(true)
+                .setSources(true));
+
     }
 
     @AfterStep
     public void recordsteps(Scenario scenario){
         String scenarioName=scenario.getName();
+        System.out.println(scenario.getLine());
         String step=scenarioName+"-"+scenario.getLine();
         String currentDir = System.getProperty("user.dir");
-        page.screenshot(new Page.ScreenshotOptions()
+        byte[] buffer =page.screenshot(new Page.ScreenshotOptions()
                 .setPath(Paths.get(currentDir + "/screenshots/"+step+System.currentTimeMillis()+".png"))
                 .setFullPage(true));
+        scenario.attach(buffer,"image/png",step);
         ComLogger.info("Got Screenshot");
+
     }
 
 
     @After
     public void teardown(Scenario scenario){
+        context.tracing().stop(new Tracing.StopOptions()
+                .setPath(Paths.get("C:/Users/vmuddebi/IdeaProjects/CuCumPlaywright/test-output/trace.zip")));
         page.context().browser().close();
         ComLogger.info("Page Driver Closed");
         ComLogger.info("Driver Closed");
