@@ -37,9 +37,9 @@ public class HomePageSteps {
 
     @Then("verify success message")
     public void verifySuccessMessage() {
-        String successmsg=Testconfig.getprop("success.msg.txt");
+        String successmsg = Testconfig.getprop("success.msg.txt");
         Assert.assertTrue(homePage.getSuccesmsg().contains(successmsg));
-        Assert.assertEquals(Testconfig.getprop("itemMAC"),homePage.cartitemname());
+        Assert.assertEquals(Testconfig.getprop("itemMAC"), homePage.cartitemname());
     }
 
     @When("user navigate to login page")
@@ -51,6 +51,10 @@ public class HomePageSteps {
     @When("user got to cart")
     public void userGotToCart() {
         homePage.goto_cart();
+    }
+    @When("user search for {string}")
+    public void user_search_for(String string) {
+        homePage.searchproduct(string);
     }
 
 

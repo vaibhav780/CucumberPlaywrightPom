@@ -6,7 +6,7 @@ import java.util.Locale;
 
 public class Datagen {
 
-    Faker faker = new Faker();
+    Faker faker = new Faker(new Locale("en-IND"));
 
     String fname;
     String lastname;

@@ -23,4 +23,11 @@ public class EventsUtils {
         ComLogger.info("Got Screenshot");
     }
 
+    public static void pause(long sec){
+        try {
+            Thread.sleep(sec);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

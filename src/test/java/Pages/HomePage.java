@@ -1,5 +1,6 @@
 package Pages;
 
+import Utils.ConfigReader;
 import Utils.Testconfig;
 import com.microsoft.playwright.Page;
 
@@ -41,6 +42,13 @@ public class HomePage {
         System.out.println(page.locator(Testconfig.getprop("success.msg")).textContent());
        return page.locator(Testconfig.getprop("success.msg")).textContent();
     }
+
+
+    public void searchproduct(String item){
+        page.fill(ConfigReader.getProperty("home.search"),item );
+        page.click(ConfigReader.getProperty("home.search.btn"));
+    }
+
 }
 
 

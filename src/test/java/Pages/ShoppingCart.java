@@ -1,5 +1,7 @@
 package Pages;
 
+import Utils.ConfigReader;
+import Utils.EventsUtils;
 import Utils.Testconfig;
 import com.microsoft.playwright.Page;
 
@@ -12,6 +14,11 @@ public class ShoppingCart {
 
     public String getitemName(){
        return page.locator(Testconfig.getprop("cart.item.name")).textContent();
+    }
+
+    public void removeProduct(){
+        page.click(ConfigReader.getProperty("shoppingcart.remove"));
+        EventsUtils.pause(3000);
     }
 
 }
